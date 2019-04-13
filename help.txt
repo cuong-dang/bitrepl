@@ -1,0 +1,21 @@
+## Supported operators
+- Unary: +, -, ~
+- Arithmetic: +, -, *, /, %
+- Bitwise: |, ^, &, <<, >>, >>>
+- Assignment: =, |=, ^=, &=, <<=, >>=, >>>=, +=, -=, *=, /=, %=
+- Comment: //
+
+## Quirks
+- Unary + and - are invalid for hexadecimal numbers.
+- Left shift << by more than the current bit width returns 0.
+- >>> is adopted from Java. It shifts right without sign extension.
+- Variable names must consist of only letters and have at most 15 characters.
+- Variables do not lose their set bits when the bit width is reduced; they
+  will then be overflowed.
+
+## Option commands
+- set dm [bin|hex|dec]: Change output display mode to binary, hexadecimal, or
+  decimal
+- set bw x: Set bit width to x that must be positive, maximum 32, and
+  divisible by 4
+- help: Display help
