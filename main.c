@@ -341,6 +341,8 @@ enum evalstt assignexpr(char **s, Primary *result)
         default: ;
         }
     }
+    if (isoverflowed(*result))
+        return EVALERR_OF;
     hmap_add(symtab, varname, result);
     return EVAL_NOERR;
 }
@@ -355,6 +357,8 @@ enum evalstt borexpr(char **s, Primary *result)
     for (;;) {
         skip_whitespace(s);
         if (strncmp(*s, "|", 1) != 0) {
+            if (isoverflowed(left))
+                return EVALERR_OF;
             *result = left;
             return EVAL_NOERR;
         }
@@ -473,8 +477,6 @@ enum evalstt factorexpr(char **s, Primary *result)
 
     if ((estt = unaryexpr(s, &left, &dummy)) != EVAL_NOERR)
         return estt;
-    if (isoverflowed(left))
-        return EVALERR_OF;
     for (;;) {
         enum token tk;
 
@@ -488,8 +490,6 @@ enum evalstt factorexpr(char **s, Primary *result)
         }
         if ((estt = unaryexpr(s, &right, &dummy)) != EVAL_NOERR)
             return estt;
-        if (isoverflowed(right))
-            return EVALERR_OF;
         if (tk == MULTIPLY)
             left *= right;
         else {
