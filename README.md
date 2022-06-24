@@ -55,8 +55,6 @@ d> v
 d>
 ```
 
-![](sample.gif)
-
 ## Useful bit hack resources
 - (page) https://graphics.stanford.edu/~seander/bithacks.html
 - (book) Hacker's Delight by Henry S. Warren
